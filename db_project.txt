@@ -1,0 +1,138 @@
+declare
+   c int;
+begin
+   select count(*) into c from user_tables where table_name = upper('company');
+   if c = 1 then
+      execute immediate 'drop table company'; 
+   end if;
+end;
+/
+
+declare
+   c int;
+begin
+   select count(*) into c from user_tables where table_name = upper('employee');
+   if c = 1 then
+      execute immediate 'drop table employee'; 
+   end if;
+end;
+/
+
+
+
+
+declare
+   c int;
+begin
+   select count(*) into c from user_tables where table_name = upper('applicant');
+   if c = 1 then
+      execute immediate 'drop table applicant'; 
+   end if;
+end;
+/
+
+
+
+declare
+   c int;
+begin
+   select count(*) into c from user_tables where table_name = upper('job_catagory');
+   if c = 1 then
+      execute immediate 'drop table job_category'; 
+   end if;
+end;
+/
+
+
+declare
+   c int;
+begin
+   select count(*) into c from user_tables where table_name = upper('job_location');
+   if c = 1 then
+      execute immediate 'drop table job_location'; 
+   end if;
+end;
+/
+declare
+   c int;
+begin
+   select count(*) into c from user_tables where table_name = upper('job_info');
+   if c = 1 then
+      execute immediate 'drop table job_info'; 
+   end if;
+end;
+/
+declare
+   c int;
+begin
+   select count(*) into c from user_tables where table_name = upper('application_details');
+   if c = 1 then
+      execute immediate 'drop table application_details'; 
+   end if;
+end;
+/
+create table  job_info(
+    job_id int NOT NULL primary key,
+    job_title varchar(20),
+    job_type varchar(20),
+    description varchar(50),
+    catagory_id int,
+    location_id int,
+    comapny_id int,
+    no_of_vacancy int,
+    salary int,
+    post_date varchar(10),
+    application_date varchar(10)
+
+);
+
+create table job_catagory(
+    catagory_id int NOT NULL primary key,
+    catagory_name varchar(20),
+    Admin_id int
+);
+
+create table job_location(
+    location_id int NOT NULL primary key,
+    location_name varchar(20),
+    Admin_id int
+);
+
+create table comapny(
+    comapny_id int NOT NULL primary key,
+    comp_username varchar(20),
+    comp_password varchar(20),
+    comp_email varchar(20),
+    contact varchar(20),
+    address varchar(50),
+    website varchar(20)
+
+);
+
+create table employee(
+    employee_id int NOT NULL primary key,
+    employee_username varchar(20),
+    employee_password varchar(20),
+    employee_name varchar(20),
+    employee_email varchar(20),
+    employee_contact varchar(50)
+);
+
+create table applicant(
+    applicant_id int NOT NULL primary key,
+    applicant_name varchar(20),
+    applicant_username varchar(20),
+    applicant_password varchar(20),
+    applicant_email varchar(20),
+    applicant_gender varchar(10),
+    applicant_contact varchar(50)
+);
+
+create table application_details(
+  application_id int NOT NULL primary key,
+  applicant_id int,
+  job_id int,
+  application_status varchar(20),
+  foreign key (applicant_id
+  )
+);
